@@ -1,5 +1,38 @@
 package com.example.exp4
 
+
+
+
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+        val phNo = findViewById<EditText>(R.id.editText)
+        val msg = findViewById<EditText>(R.id.editText2)
+        val send = findViewById<Button>(R.id.button)
+
+        val intent = Intent(Intent.ACTION_SENDTO)
+
+        send.setOnClickListener {
+            intent.setData(Uri.parse("smsto:"+Uri.encode("+91"+"${phNo.text}")))
+            intent.putExtra("sms_body",msg.text.toString())
+            startActivity(intent)
+
+        }
+
+    }
+}
+
+
 /*
 import android.os.Bundle
 import android.telephony.SmsManager
@@ -36,6 +69,7 @@ class MainActivity : AppCompatActivity() {
  */
 //if not above code try below comment above
 
+/*
 import android.os.Bundle
 import android.telephony.SmsManager
 import android.widget.Button
@@ -101,3 +135,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+*/
